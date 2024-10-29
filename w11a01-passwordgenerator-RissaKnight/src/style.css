@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Peralta&family=Roboto:wght@300;400;500;700&display=swap');
+body {
+    font-family: Roboto;
+    font-size: 100%;
+    background-color: white;
+    width: 680px;
+    margin: 0 auto;
+	color: #386f7a;
+    border: 3px solid black;
+    border-radius: 25px;
+    padding: 0 2em 1em;
+}
+h1 { 
+    font-size: 24pt;
+	font-family: "Roboto";
+    margin-bottom: .5em;
+	text-align: center;
+	color: #386f7a;
+}
+input {
+    width: 200px;
+    margin-right: 5px;
+	margin-bottom: 5px;
+}
+.center {
+	text-align: center;
+}
+.right {
+	margin-left: 125px;
+}

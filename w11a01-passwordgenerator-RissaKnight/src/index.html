@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Password Generator</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+	<link type="text/css" rel="stylesheet" href="jquery-ui.min.css">
+	<link type="text/css" rel="stylesheet" href="jquery-ui.theme.min.css">
+</head>
+<body>
+    <main>
+        <h1>Generate a password</h1>
+		<br>
+		<div class="right">
+			<label class="ui-widget" for="num">Number of characters:</label>
+			<input class="ui-widget" type="text" id="num">
+		</div>
+		<div class="right">
+			<label class="ui-widget" for="password">Password:</label>
+			<input class="ui-widget" type="text" id="password" size="150" disabled>
+		</div>
+		<br>
+		<div class="center">
+			<input class="ui-button" type="button" id="generate" value="Get Password">
+			<input class="ui-button" type="button" id="clear" value="Clear">
+		</div>
+    </main>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="jquery-ui.min.js"></script>	
+    <script src="script.js"></script>
+
+<script>
+	$(document).ready( () => {
+	const lowcase = "abcdefghijklmnopqrstuvwxyz";
+//		$("lowcase").val(lowcase)
+    const upcase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//		$("upcase").val(upcase)
+    const numbers = "0123456789";
+//		$("numbers").val(numbers)
+    const specialChar = "$&()*+[]@#^-_!?";
+//		$("specialChar").val(specialChar)	
+
+// function for random 
+function random(max) {
+// getRandomInt(max)
+	return Math.floor(Math.random() * max);
+}
+
+// generate new password
+$("#generate").click( (evt) => {
+        let numChars = $("#num").val();
+        numChars = parseInt(numChars);
+
+        if (isNaN(numChars) || numChars < 8 || numChars > 14) {
+            $("<div> The number entered must be numeric and between 8-14 to generate a secure password.</div>").dialog({
+                title: "Invalid Input",
+                modal: true,
+                buttons: {
+                    Ok: function() {
+                        $(this).dialog("close");
+                    }
+                } 
+            });
+            return;
+        }
+// initialize password
+        let password = "";
+// generate for specified length
+        for (let i = 0; i < numChars; i++) {
+            let category = Math.floor(Math.random() * 4);
+            let passwordChar;
+
+            if (category === 0) {
+                passwordChar = lowcase[Math.floor(Math.random() * lowcase.length)];
+            } else if (category === 1) {
+                passwordChar = upcase[Math.floor(Math.random() * upcase.length)];
+            } else if (category === 2) {
+                passwordChar = numbers[Math.floor(Math.random() * numbers.length)];
+            } else {
+                passwordChar = specialChar[Math.floor(Math.random() * specialChar.length)];
+            }
+
+            password += passwordChar;
+        }
+
+        $("#password").val(password);
+    });
+
+
+// clear click
+		$("#clear").click( (evt) => {
+			$("#num").val("");
+			$("#password").val("");
+		$("#num").focus();
+		})
+		$("#num").focus();
+	});
+</script>
+
+</body>
+</html>
